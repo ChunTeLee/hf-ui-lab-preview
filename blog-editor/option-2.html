@@ -181,7 +181,41 @@ image = pipe("huggy waving, flat vector, brand yellow").images[0]</code></pre>
 
 	<!-- Help chips (syntax guide collapsed to chips — Option 2) -->
 	<aside class="w-56 flex-none space-y-2 px-6 pt-6 max-xl:hidden">
-		<a class="tag w-full" href="#"><svg class="h-3.5 w-3.5 text-black" viewBox="0 0 32 32" fill="currentColor"><path d="M17 22v-8h-4v2h2v6h-3v2h8v-2h-3z"/><path d="M16 8a1.5 1.5 0 1 0 1.5 1.5A1.5 1.5 0 0 0 16 8z"/><path d="M16 30a14 14 0 1 1 14-14a14 14 0 0 1-14 14zm0-26a12 12 0 1 0 12 12A12 12 0 0 0 16 4z"/></svg><span>Syntax guide</span></a>
+		<div class="relative">
+			<button id="syntax-btn" class="tag w-full"><svg class="h-3.5 w-3.5 text-black" viewBox="0 0 32 32" fill="currentColor"><path d="M17 22v-8h-4v2h2v6h-3v2h8v-2h-3z"/><path d="M16 8a1.5 1.5 0 1 0 1.5 1.5A1.5 1.5 0 0 0 16 8z"/><path d="M16 30a14 14 0 1 1 14-14a14 14 0 0 1-14 14zm0-26a12 12 0 1 0 12 12A12 12 0 0 0 16 4z"/></svg><span>Syntax guide</span></button>
+			<div id="syntax-popover" class="popover popover-down !w-80 p-4">
+				<div class="max-h-96 overflow-y-auto pr-1">
+					<ul class="list-disc space-y-2 pl-4 text-sm text-gray-500">
+						<li>
+							Write your article using <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet" target="_blank" class="text-blue-500 underline">Markdown</a>.
+							<details class="mt-1" open>
+								<summary class="cursor-pointer">Commonly used syntax</summary>
+								<div class="mb-2 mt-2 overflow-hidden rounded-md border border-gray-200">
+									<table class="w-full table-auto bg-white text-sm text-gray-600">
+										<tbody class="[&_td]:px-2 [&_td]:py-1 [&_td:not(:last-child)]:border-r [&_tr:not(:last-child)_td]:border-b [&_td]:border-gray-200">
+											<tr><td># Header<br />...<br />###### Header</td><td>H1 Header<br />...<br />H6 Header</td></tr>
+											<tr><td>*italics* or _italics_</td><td><em>italics</em></td></tr>
+											<tr><td>**bold**</td><td><strong>bold</strong></td></tr>
+											<tr><td>[Link](https://...)</td><td><a class="underline">Link</a></td></tr>
+											<tr><td>* item 1<br />* item 2</td><td>&bull; item 1<br />&bull; item 2</td></tr>
+											<tr><td>1. item 1<br />2. item 2</td><td>1. item 1<br />2. item 2</td></tr>
+											<tr><td>&gt; quoted text</td><td><span class="border-l-2 border-gray-200 pl-2">quoted text</span></td></tr>
+											<tr><td>`inline code`</td><td><code class="bg-gray-200/50 px-1">inline code</code></td></tr>
+											<tr><td>```<br />code block<br />```</td><td><span class="block rounded-md border border-gray-200 bg-gray-200/50 p-1.5"><code>code block</code></span></td></tr>
+										</tbody>
+									</table>
+								</div>
+							</details>
+						</li>
+						<li>Start your post with a h1 header (<code class="rounded-sm bg-gray-300/30 px-1">#</code>), it will be used as the article title.</li>
+						<li>
+							Use <a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics#Mathematics_environments" target="_blank" class="text-blue-500 underline">LaTeX</a> to add math expressions:
+							<span class="mt-0.5 block"><span class="rounded-sm bg-gray-300/50 px-1">\\(...\\)</span> for inline formulas · <span class="rounded-sm bg-gray-300/50 px-1">$$...$$</span> for displayed equations</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
 		<a class="tag w-full" href="https://huggingface.co/spaces/blog-explorers/README/discussions/5" target="_blank"><svg class="h-3.5 w-3.5 text-black" viewBox="0 0 32 32" fill="currentColor"><path d="M17 22v-8h-4v2h2v6h-3v2h8v-2h-3z"/><path d="M16 8a1.5 1.5 0 1 0 1.5 1.5A1.5 1.5 0 0 0 16 8z"/><path d="M16 30a14 14 0 1 1 14-14a14 14 0 0 0-14 14zm0-26a12 12 0 1 0 12 12A12 12 0 0 0 16 4z"/></svg><span>HF Blog Discussion</span></a>
 	</aside>
 </div>

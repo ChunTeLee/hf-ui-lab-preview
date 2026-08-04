@@ -56,7 +56,7 @@ tailwind.config = {
 
 <!-- ══ Editor header: title + URL builder moved up (Option 1) ══ -->
 <div class="sticky top-0 z-20 border-b border-gray-100 bg-white">
-	<div class="mx-auto flex max-w-[1536px] items-center justify-between gap-4 px-5 py-3 xl:pl-56 2xl:pl-72">
+	<div class="mx-auto flex max-w-[1536px] items-center justify-between gap-4 px-4 py-3">
 		<div class="flex min-w-0 items-center gap-3">
 			<div class="flex items-center gap-1.5">
 				<svg class="h-5 w-5 min-w-5 text-blue-600" viewBox="0 0 15 15" fill="currentColor"><path d="M3.417 12.75c-.32 0-.596-.114-.824-.342a1.126 1.126 0 0 1-.343-.825V3.417c0-.321.114-.597.343-.824.23-.228.503-.343.824-.343h8.166c.321 0 .596.114.825.343.228.229.342.503.342.824v8.166c0 .32-.114.596-.342.825a1.12 1.12 0 0 1-.825.342zm1.166-2.333h4.084V9.25H4.583v1.167m0-2.334h5.834V6.917H4.583v1.166m0-2.333h5.834V4.583H4.583V5.75"/></svg>
@@ -65,13 +65,47 @@ tailwind.config = {
 			<p class="min-w-0 translate-y-px truncate text-sm text-gray-400 max-md:hidden">Publish a community Article on Hugging Face Blog.</p>
 		</div>
 		<div class="flex items-center gap-2">
-			<a class="tag" href="#"><svg class="h-3.5 w-3.5 text-black" viewBox="0 0 32 32" fill="currentColor"><path d="M17 22v-8h-4v2h2v6h-3v2h8v-2h-3z"/><path d="M16 8a1.5 1.5 0 1 0 1.5 1.5A1.5 1.5 0 0 0 16 8z"/><path d="M16 30a14 14 0 1 1 14-14a14 14 0 0 1-14 14zm0-26a12 12 0 1 0 12 12A12 12 0 0 0 16 4z"/></svg><span>Syntax guide</span></a>
+			<div class="relative">
+				<button id="syntax-btn" class="tag"><svg class="h-3.5 w-3.5 text-black" viewBox="0 0 32 32" fill="currentColor"><path d="M17 22v-8h-4v2h2v6h-3v2h8v-2h-3z"/><path d="M16 8a1.5 1.5 0 1 0 1.5 1.5A1.5 1.5 0 0 0 16 8z"/><path d="M16 30a14 14 0 1 1 14-14a14 14 0 0 1-14 14zm0-26a12 12 0 1 0 12 12A12 12 0 0 0 16 4z"/></svg><span>Syntax guide</span></button>
+				<div id="syntax-popover" class="popover popover-down !w-80 p-4">
+					<div class="max-h-96 overflow-y-auto pr-1">
+						<ul class="list-disc space-y-2 pl-4 text-sm text-gray-500">
+							<li>
+								Write your article using <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet" target="_blank" class="text-blue-500 underline">Markdown</a>.
+								<details class="mt-1" open>
+									<summary class="cursor-pointer">Commonly used syntax</summary>
+									<div class="mb-2 mt-2 overflow-hidden rounded-md border border-gray-200">
+										<table class="w-full table-auto bg-white text-sm text-gray-600">
+											<tbody class="[&_td]:px-2 [&_td]:py-1 [&_td:not(:last-child)]:border-r [&_tr:not(:last-child)_td]:border-b [&_td]:border-gray-200">
+												<tr><td># Header<br />...<br />###### Header</td><td>H1 Header<br />...<br />H6 Header</td></tr>
+												<tr><td>*italics* or _italics_</td><td><em>italics</em></td></tr>
+												<tr><td>**bold**</td><td><strong>bold</strong></td></tr>
+												<tr><td>[Link](https://...)</td><td><a class="underline">Link</a></td></tr>
+												<tr><td>* item 1<br />* item 2</td><td>&bull; item 1<br />&bull; item 2</td></tr>
+												<tr><td>1. item 1<br />2. item 2</td><td>1. item 1<br />2. item 2</td></tr>
+												<tr><td>&gt; quoted text</td><td><span class="border-l-2 border-gray-200 pl-2">quoted text</span></td></tr>
+												<tr><td>`inline code`</td><td><code class="bg-gray-200/50 px-1">inline code</code></td></tr>
+												<tr><td>```<br />code block<br />```</td><td><span class="block rounded-md border border-gray-200 bg-gray-200/50 p-1.5"><code>code block</code></span></td></tr>
+											</tbody>
+										</table>
+									</div>
+								</details>
+							</li>
+							<li>Start your post with a h1 header (<code class="rounded-sm bg-gray-300/30 px-1">#</code>), it will be used as the article title.</li>
+							<li>
+								Use <a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics#Mathematics_environments" target="_blank" class="text-blue-500 underline">LaTeX</a> to add math expressions:
+								<span class="mt-0.5 block"><span class="rounded-sm bg-gray-300/50 px-1">\\(...\\)</span> for inline formulas · <span class="rounded-sm bg-gray-300/50 px-1">$$...$$</span> for displayed equations</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
 			<a class="tag max-sm:hidden" href="https://huggingface.co/spaces/blog-explorers/README/discussions/5" target="_blank"><svg class="h-3.5 w-3.5 text-black" viewBox="0 0 32 32" fill="currentColor"><path d="M17 22v-8h-4v2h2v6h-3v2h8v-2h-3z"/><path d="M16 8a1.5 1.5 0 1 0 1.5 1.5A1.5 1.5 0 0 0 16 8z"/><path d="M16 30a14 14 0 1 1 14-14a14 14 0 0 1-14 14zm0-26a12 12 0 1 0 12 12A12 12 0 0 0 16 4z"/></svg><span>HF Blog Discussion</span></a>
 		</div>
 	</div>
 	<!-- URL builder row — surfaced at the top instead of buried in the footer -->
 	<div class="border-t border-gray-50 bg-gray-50/60">
-	<div class="mx-auto flex max-w-[1536px] items-center gap-2 px-5 py-2.5 text-sm text-gray-600 xl:pl-56 2xl:pl-72">
+	<div class="mx-auto flex max-w-[1536px] items-center gap-2 px-4 py-2.5 text-sm text-gray-600">
 		<span class="font-medium text-gray-400">Blog URL</span>
 		<span class="max-xl:hidden">https://huggingface.co/blog/</span>
 		<span class="xl:hidden">hf.co/blog/</span>
@@ -93,10 +127,7 @@ tailwind.config = {
 
 <!-- ══ Main split: gradient page bg · empty gutter (xl+) · editor ┃ metadata panel ══ -->
 <div class="bg-gradient-to-t from-gray-50 to-white">
-<div class="mx-auto flex min-h-[calc(100vh-16rem)] max-w-[1536px] items-stretch">
-
-	<!-- empty left area on big screens, like the original editor grid -->
-	<div class="hidden flex-none xl:block xl:w-56 2xl:w-72"></div>
+<div class="mx-auto flex min-h-[calc(100vh-16rem)] max-w-[1536px] items-stretch px-4">
 
 	<!-- Editor pane -->
 	<div class="relative min-w-0 flex-1 border-x border-gray-100 bg-white">
@@ -248,7 +279,7 @@ A scratch draft to poke at the Hub blog editor.
 
 <!-- ══ Footer action bar ══ -->
 <div class="sticky bottom-0 z-20 border-t border-gray-100 bg-white py-2.5">
-	<div class="mx-auto flex min-h-[2rem] max-w-[1536px] items-center gap-3 px-5 xl:pl-56 2xl:pl-72">
+	<div class="mx-auto flex min-h-[2rem] max-w-[1536px] items-center gap-3 px-4">
 		<!-- draft selector (the original left-panel drafts list, as a footer popover) -->
 		<div class="relative">
 			<button id="draft-btn" class="flex h-8 items-center gap-2 rounded-lg border border-gray-200 bg-white px-2.5 text-sm hover:bg-gray-50">

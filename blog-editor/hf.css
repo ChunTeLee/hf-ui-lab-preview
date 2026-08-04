@@ -153,6 +153,8 @@ html { font-family: "Source Sans Pro", "Source Sans 3", -apple-system, BlinkMacS
 	animation: modal-in 0.14s ease-out;
 }
 .popover.open { display: block; }
+/* variant anchored below the trigger (for header chips) */
+.popover-down { top: calc(100% + 10px); bottom: auto; left: auto; right: 0; }
 
 /* Floating lab switcher — centered at the top of the page */
 .lab-switch {

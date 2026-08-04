@@ -88,9 +88,11 @@ if (metaPanel && collapseBtn) {
 // ── Footer popovers (Option 2 settings · Option 1 draft selector)
 const settingsPop = document.getElementById("settings-popover");
 const draftPop = document.getElementById("draft-popover");
+const syntaxPop = document.getElementById("syntax-popover");
 function closeSettings() {
 	if (settingsPop) settingsPop.classList.remove("open");
 	if (draftPop) draftPop.classList.remove("open");
+	if (syntaxPop) syntaxPop.classList.remove("open");
 }
 function wirePopover(btnId, pop) {
 	const btn = document.getElementById(btnId);
@@ -105,7 +107,8 @@ function wirePopover(btnId, pop) {
 }
 wirePopover("settings-btn", settingsPop);
 wirePopover("draft-btn", draftPop);
-if (settingsPop || draftPop) {
+wirePopover("syntax-btn", syntaxPop);
+if (settingsPop || draftPop || syntaxPop) {
 	document.addEventListener("click", () => closeSettings());
 }
 
