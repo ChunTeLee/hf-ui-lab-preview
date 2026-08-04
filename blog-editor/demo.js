@@ -105,6 +105,14 @@ if (settingsPop || draftPop) {
 	document.addEventListener("click", () => closeSettings());
 }
 
+// ── Authors label: "Coauthors" once more than one author is listed
+(function authorsLabel() {
+	const lbl = document.querySelector("[data-authors-label]");
+	if (!lbl) return;
+	const count = document.querySelectorAll(".author-row").length;
+	lbl.textContent = count > 1 ? "Coauthors" : "Authors";
+})();
+
 // ── Thumbnail replace (always-on translucent button)
 document.querySelectorAll("[data-thumb-replace]").forEach(btn =>
 	btn.addEventListener("click", () => showToast("Demo only — a file picker would open here"))

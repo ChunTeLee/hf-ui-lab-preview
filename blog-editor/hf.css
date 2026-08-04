@@ -176,22 +176,20 @@ html { font-family: "Source Sans Pro", "Source Sans 3", -apple-system, BlinkMacS
 }
 .toast.open { display: flex; animation: modal-in 0.18s ease-out; }
 
-/* Panel handle zone (Option 1) — iOS-style see-through grab bar + settings icon,
-   wrapped in a generous hit box straddling the editor/panel divider */
+/* Panel handle zone (Option 1) — settings icon + iOS-style grab bar floated
+   ~5px off the right panel edge. Hover lifts the whole group's opacity. */
 .handle-zone {
-	position: absolute; top: 50%; right: -16px; transform: translateY(-50%); z-index: 30;
-	display: flex; flex-direction: column; align-items: center; justify-content: center;
-	gap: 0.625rem; width: 32px; height: 9rem; border-radius: 9999px;
-	border: 0; background: transparent; cursor: pointer; padding: 0;
+	position: absolute; top: 50%; right: 0; transform: translateY(-50%); z-index: 30;
+	display: flex; flex-direction: row; align-items: center; gap: 6px;
+	padding: 12px 5px; border: 0; background: transparent; cursor: pointer;
+	opacity: 0.5; transition: opacity 0.15s ease;
 }
-.handle-zone:hover { background: rgb(17 24 39 / 0.04); }
+.handle-zone:hover { opacity: 1; }
 .ios-handle {
 	width: 5px; height: 44px; border-radius: 9999px;
-	background: rgb(17 24 39 / 0.16); transition: background 0.15s ease;
+	background: rgb(17 24 39 / 0.25);
 }
-.handle-zone:hover .ios-handle { background: rgb(17 24 39 / 0.34); }
-.handle-zone .zone-gear { color: rgb(17 24 39 / 0.28); transition: color 0.15s ease; }
-.handle-zone:hover .zone-gear { color: rgb(17 24 39 / 0.55); }
+.handle-zone .zone-gear { width: 16px; height: 16px; color: rgb(17 24 39 / 0.5); }
 
 /* Always-on translucent replace button on thumbnails */
 .thumb-replace {

@@ -187,24 +187,24 @@ image = pipe("huggy waving, flat vector, brand yellow").images[0]</code></pre>
 		<!-- Authors -->
 		<section>
 			<div class="mb-2 flex items-baseline justify-between">
-				<h3 class="text-sm font-semibold text-gray-700">Authors</h3>
+				<h3 data-authors-label class="text-sm font-semibold text-gray-700">Authors</h3>
 				<span class="hf-tip cursor-default text-gray-400" data-tip="Place the authors, including yourself, in desired contribution order. The authors must be following you on hf.co to be added as a coauthor.">
 					<svg class="h-4 w-4" viewBox="0 0 32 32" fill="currentColor"><path d="M17 22v-8h-4v2h2v6h-3v2h8v-2h-3z"/><path d="M16 8a1.5 1.5 0 1 0 1.5 1.5A1.5 1.5 0 0 0 16 8z"/><path d="M16 30a14 14 0 1 1 14-14a14 14 0 0 1-14 14zm0-26a12 12 0 1 0 12 12A12 12 0 0 0 16 4z"/></svg>
 				</span>
 			</div>
 			<div class="space-y-1.5">
-				<div class="flex items-center gap-2.5 rounded-lg border border-gray-200 bg-white px-2.5 py-1.5">
+				<div class="author-row group flex items-center gap-2.5 rounded-lg border border-gray-200 bg-white px-2.5 py-1.5">
 					<img src="assets/chunte.png" class="h-7 w-7 rounded-full" alt="Chunte" />
 					<span class="text-sm font-medium text-gray-800">Chunte</span>
 					<span class="rounded bg-gray-100 px-1 text-xs text-gray-500">you</span>
 					<span class="flex-1"></span>
-					<span class="cursor-grab text-gray-300" title="Drag to reorder">⠿</span>
+					<span class="cursor-grab text-gray-300 opacity-0 transition-opacity group-hover:opacity-100" title="Drag to reorder">⠿</span>
 				</div>
-				<div class="group flex items-center gap-2.5 rounded-lg border border-gray-200 bg-white px-2.5 py-1.5">
+				<div class="author-row group flex items-center gap-2.5 rounded-lg border border-gray-200 bg-white px-2.5 py-1.5">
 					<span class="flex h-7 w-7 items-center justify-center rounded-full bg-indigo-100 text-xs font-bold text-indigo-600">J</span>
 					<span class="text-sm font-medium text-gray-800">julien-c</span>
 					<span class="flex-1"></span>
-					<span class="cursor-grab text-gray-300" title="Drag to reorder">⠿</span>
+					<span class="cursor-grab text-gray-300 opacity-0 transition-opacity group-hover:opacity-100" title="Drag to reorder">⠿</span>
 					<button class="text-gray-400 opacity-0 transition-opacity hover:text-red-500 group-hover:opacity-100" title="Remove coauthor">
 						<svg class="h-3.5 w-3.5" viewBox="0 0 32 32" fill="currentColor"><path d="M24 9.4L22.6 8L16 14.6L9.4 8L8 9.4l6.6 6.6L8 22.6L9.4 24l6.6-6.6l6.6 6.6l1.4-1.4l-6.6-6.6L24 9.4z"/></svg>
 					</button>
@@ -226,7 +226,7 @@ image = pipe("huggy waving, flat vector, brand yellow").images[0]</code></pre>
 			<button id="draft-btn" class="flex h-8 items-center gap-2 rounded-lg border border-gray-200 bg-white px-2.5 text-sm hover:bg-gray-50">
 				<img src="assets/chunte.png" class="h-4 w-4 rounded-full" alt="" />
 				<span class="max-w-[220px] truncate font-medium text-gray-800">Designing Huggy: Behind Hugging Face&rsquo;s…</span>
-				<span class="rounded-sm border border-gray-300 px-1 text-xs text-gray-400">unsaved</span>
+				<span class="rounded bg-gray-100 px-1.5 py-px text-[11px] font-medium text-gray-500">unsaved</span>
 				<svg class="h-2.5 w-2.5 text-gray-400" viewBox="0 0 12 7" fill="none"><path d="M1 1L6 6L11 1" stroke="currentColor"/></svg>
 			</button>
 			<div id="draft-popover" class="popover !w-72 p-3">
@@ -242,7 +242,7 @@ image = pipe("huggy waving, flat vector, brand yellow").images[0]</code></pre>
 					</div>
 					<div class="mb-px flex items-center justify-between gap-1.5 truncate rounded-lg bg-black px-1.5 py-0.5 text-gray-200">
 						<span class="truncate">Designing Huggy: Behind Hugging…</span>
-						<div class="rounded-sm border border-gray-400 px-1 py-0 text-xs text-gray-300">unsaved</div>
+						<div class="rounded bg-white/20 px-1.5 py-px text-[11px] font-medium text-gray-100">unsaved</div>
 					</div>
 					<button class="mb-px flex items-center justify-between gap-1.5 truncate rounded-lg px-1.5 py-0.5 text-left text-gray-500 hover:text-gray-900">
 						<span class="truncate">Test</span>
