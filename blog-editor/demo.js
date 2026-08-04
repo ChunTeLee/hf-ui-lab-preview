@@ -169,6 +169,36 @@ document.querySelectorAll("#draft-popover [data-draft]").forEach(row =>
 );
 if (document.getElementById("row-test")) selectDraft("huggy");
 
+// ── Option 2: Article settings expand the footer upward (not a popover)
+const settingsPanel = document.getElementById("settings-panel");
+if (settingsPanel) {
+	const settingsToggle = document.getElementById("settings-btn");
+	settingsToggle.addEventListener("click", () => {
+		const open = !settingsPanel.classList.toggle("hidden");
+		settingsToggle.classList.toggle("tag-active", open);
+	});
+}
+
+// ── Option 2: save flow — never-saved starts as "Save as draft";
+// after the first save the button becomes save + history segments
+const historySeg = document.getElementById("btn-history");
+if (historySeg && !document.getElementById("row-test")) {
+	const saveB = document.getElementById("btn-save");
+	saveB.addEventListener("click", () => {
+		saveB.textContent = "Update draft";
+		historySeg.classList.remove("hidden");
+		historySeg.classList.add("flex");
+		document.getElementById("status-unsaved").style.display = "none";
+		document.getElementById("status-saved").style.display = "flex";
+		const chip = document.getElementById("sidebar-unsaved-chip");
+		if (chip) chip.style.display = "none";
+		savedSeconds = 0;
+		renderSaved();
+		showToast("Draft saved — demo only 🤗");
+	});
+	historySeg.addEventListener("click", () => showToast("Version history would open here — demo only"));
+}
+
 // ── Authors label: "Coauthors" once more than one author is listed
 (function authorsLabel() {
 	const lbl = document.querySelector("[data-authors-label]");
