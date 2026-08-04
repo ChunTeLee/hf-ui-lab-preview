@@ -71,29 +71,44 @@ document.querySelectorAll("[data-preview-toggle]").forEach(btn =>
 	})
 );
 
-// ── Option 1: collapse the metadata panel
+// ── Option 1: collapse the metadata panel (iOS-style handle zone)
 const metaPanel = document.getElementById("meta-panel");
 const collapseBtn = document.getElementById("collapse-handle");
 if (metaPanel && collapseBtn) {
 	collapseBtn.addEventListener("click", () => {
 		const closed = metaPanel.classList.toggle("hidden");
-		collapseBtn.querySelector("svg").style.transform = closed ? "rotate(180deg)" : "";
 		collapseBtn.title = closed ? "Show article settings" : "Hide article settings";
 	});
 }
 
-// ── Option 2: settings popover in the footer
+// ── Footer popovers (Option 2 settings · Option 1 draft selector)
 const settingsPop = document.getElementById("settings-popover");
-function closeSettings() { if (settingsPop) settingsPop.classList.remove("open"); }
-const settingsBtn = document.getElementById("settings-btn");
-if (settingsBtn && settingsPop) {
-	settingsBtn.addEventListener("click", e => {
+const draftPop = document.getElementById("draft-popover");
+function closeSettings() {
+	if (settingsPop) settingsPop.classList.remove("open");
+	if (draftPop) draftPop.classList.remove("open");
+}
+function wirePopover(btnId, pop) {
+	const btn = document.getElementById(btnId);
+	if (!btn || !pop) return;
+	btn.addEventListener("click", e => {
 		e.stopPropagation();
-		settingsPop.classList.toggle("open");
+		const wasOpen = pop.classList.contains("open");
+		closeSettings();
+		if (!wasOpen) pop.classList.add("open");
 	});
-	settingsPop.addEventListener("click", e => e.stopPropagation());
+	pop.addEventListener("click", e => e.stopPropagation());
+}
+wirePopover("settings-btn", settingsPop);
+wirePopover("draft-btn", draftPop);
+if (settingsPop || draftPop) {
 	document.addEventListener("click", () => closeSettings());
 }
+
+// ── Thumbnail replace (always-on translucent button)
+document.querySelectorAll("[data-thumb-replace]").forEach(btn =>
+	btn.addEventListener("click", () => showToast("Demo only — a file picker would open here"))
+);
 
 // ── Thumbnail remove / restore (both options)
 document.querySelectorAll("[data-thumb-remove]").forEach(btn =>

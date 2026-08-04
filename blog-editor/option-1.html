@@ -71,7 +71,7 @@ tailwind.config = {
 	</div>
 	<!-- URL builder row — surfaced at the top instead of buried in the footer -->
 	<div class="flex items-center gap-2 border-t border-gray-50 bg-gray-50/60 px-5 py-2.5 text-sm text-gray-600">
-		<span class="font-medium text-gray-400">URL</span>
+		<span class="font-medium text-gray-400">Blog URL</span>
 		<span class="max-xl:hidden">https://huggingface.co/blog/</span>
 		<span class="xl:hidden">hf.co/blog/</span>
 		<select class="form-input !mt-0 !w-auto min-w-fit leading-tight">
@@ -100,9 +100,10 @@ tailwind.config = {
 			<span class="lbl">Preview</span>
 		</button>
 
-		<!-- collapse handle for the metadata panel -->
-		<button id="collapse-handle" class="collapse-handle" title="Hide article settings">
-			<svg class="h-3 w-3 transition-transform" viewBox="0 0 12 7" fill="none" style="transform: rotate(-90deg)"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5"/></svg>
+		<!-- panel handle: iOS-style see-through grab bar + settings icon, shared hit box -->
+		<button id="collapse-handle" class="handle-zone" title="Hide article settings" aria-label="Toggle article settings panel">
+			<svg class="zone-gear h-4 w-4" viewBox="0 0 9 7" fill="currentColor"><path d="M8.537 1.153H7.361A1.445 1.445 0 0 0 5.954 0c-.689 0-1.263.49-1.407 1.153H.5v.576h4.047a1.445 1.445 0 0 0 1.407 1.153c.689 0 1.263-.49 1.407-1.153h1.176v-.576M5.954 2.305a.847.847 0 0 1-.861-.864c0-.49.373-.865.861-.865s.861.375.861.865-.373.864-.861.864M.5 5.764h1.177a1.445 1.445 0 0 0 1.406 1.152c.69 0 1.263-.49 1.407-1.152h4.047v-.577H4.49a1.445 1.445 0 0 0-1.407-1.152c-.688 0-1.263.49-1.406 1.152H.5v.577M3.083 4.61c.488 0 .862.375.862.864 0 .49-.374.865-.862.865a.847.847 0 0 1-.86-.865c0-.49.372-.864.86-.864"/></svg>
+			<span class="ios-handle"></span>
 		</button>
 
 		<!-- markdown source -->
@@ -157,11 +158,6 @@ image = pipe("huggy waving, flat vector, brand yellow").images[0]</code></pre>
 			<img src="assets/thumb-huggy.svg" alt="Huggy poses" />
 		</div>
 
-		<!-- upload hint (kept from the live editor) -->
-		<div class="sticky bottom-0 flex items-center border-t border-gray-100 bg-white/95 px-4 py-1.5 text-sm text-gray-400">
-			<svg class="mr-1.5 h-4 w-4 flex-none text-gray-300" viewBox="0 0 24 24" fill="currentColor"><path d="M19 2H5a3.009 3.009 0 0 0-3 3v8.86l3.88-3.88a3.075 3.075 0 0 1 4.24 0l2.871 2.887l.888-.888a3.008 3.008 0 0 1 4.242 0L22 15.86V5a3.009 3.009 0 0 0-3-3z" opacity=".5"/><path d="M10.12 9.98a3.075 3.075 0 0 0-4.24 0L2 13.86V19a3.009 3.009 0 0 0 3 3h14a3 3 0 0 0 2.16-.92L10.12 9.98z"/><path d="m22 15.858l-3.879-3.879a3.008 3.008 0 0 0-4.242 0l-.888.888l8.165 8.209c.542-.555.845-1.3.844-2.076v-3.142z" opacity=".25"/></svg>
-			Upload images, audio, and videos by dragging in the text input, pasting, or <span class="ml-1 cursor-pointer underline">clicking here</span>.
-		</div>
 	</div>
 
 	<!-- Metadata panel (Franck-based right rail) -->
@@ -170,12 +166,12 @@ image = pipe("huggy waving, flat vector, brand yellow").images[0]</code></pre>
 		<section>
 			<div class="mb-2 flex items-baseline justify-between">
 				<h3 class="text-sm font-semibold text-gray-700">Thumbnail</h3>
-				<span class="text-xs text-gray-400">1910×1000 · ratio 1.91:1</span>
+				<span class="text-xs text-gray-400">recommended 1200×648</span>
 			</div>
-			<div data-thumb-filled class="group relative aspect-[50/27] overflow-hidden rounded-lg border border-gray-200 bg-gray-100">
+			<div data-thumb-filled class="relative aspect-[50/27] overflow-hidden rounded-lg border border-gray-200 bg-gray-100">
 				<img src="assets/thumb-huggy.svg" alt="blog thumbnail" class="h-full w-full object-cover object-center" />
-				<button data-thumb-remove title="Remove thumbnail" class="absolute right-1.5 top-1.5 flex items-center justify-center rounded-sm bg-black/80 p-1 text-white opacity-0 transition-opacity hover:bg-red-500 group-hover:opacity-100">
-					<svg class="h-3 w-3" viewBox="0 0 32 32" fill="currentColor"><path d="M24 9.4L22.6 8L16 14.6L9.4 8L8 9.4l6.6 6.6L8 22.6L9.4 24l6.6-6.6l6.6 6.6l1.4-1.4l-6.6-6.6L24 9.4z"/></svg>
+				<button data-thumb-replace title="Replace thumbnail" class="thumb-replace">
+					<svg class="h-3.5 w-3.5" viewBox="0 0 21 20" fill="currentColor"><path d="M16.9756 3.25671H4.47559C4.14407 3.25671 3.82612 3.38183 3.5917 3.60452C3.35728 3.82722 3.22559 4.12927 3.22559 4.44421V16.3192C3.22559 16.6342 3.35728 16.9362 3.5917 17.1589C3.82612 17.3816 4.14407 17.5067 4.47559 17.5067H16.9756C17.3071 17.5067 17.625 17.3816 17.8595 17.1589C18.0939 16.9362 18.2256 16.6342 18.2256 16.3192V4.44421C18.2256 4.12927 18.0939 3.82722 17.8595 3.60452C17.625 3.38183 17.3071 3.25671 16.9756 3.25671ZM16.9756 16.3192H4.47559V12.7567L7.60059 9.78796L11.0943 13.107C11.3285 13.3282 11.6454 13.4523 11.9756 13.4523C12.3058 13.4523 12.6226 13.3282 12.8568 13.107L13.8506 12.163L16.9756 15.1317V16.3192Z"/></svg>
 				</button>
 			</div>
 			<div data-thumb-empty class="hidden">
@@ -204,12 +200,12 @@ image = pipe("huggy waving, flat vector, brand yellow").images[0]</code></pre>
 					<span class="flex-1"></span>
 					<span class="cursor-grab text-gray-300" title="Drag to reorder">⠿</span>
 				</div>
-				<div class="flex items-center gap-2.5 rounded-lg border border-gray-200 bg-white px-2.5 py-1.5">
+				<div class="group flex items-center gap-2.5 rounded-lg border border-gray-200 bg-white px-2.5 py-1.5">
 					<span class="flex h-7 w-7 items-center justify-center rounded-full bg-indigo-100 text-xs font-bold text-indigo-600">J</span>
 					<span class="text-sm font-medium text-gray-800">julien-c</span>
 					<span class="flex-1"></span>
 					<span class="cursor-grab text-gray-300" title="Drag to reorder">⠿</span>
-					<button class="text-gray-400 hover:text-red-500" title="Remove coauthor">
+					<button class="text-gray-400 opacity-0 transition-opacity hover:text-red-500 group-hover:opacity-100" title="Remove coauthor">
 						<svg class="h-3.5 w-3.5" viewBox="0 0 32 32" fill="currentColor"><path d="M24 9.4L22.6 8L16 14.6L9.4 8L8 9.4l6.6 6.6L8 22.6L9.4 24l6.6-6.6l6.6 6.6l1.4-1.4l-6.6-6.6L24 9.4z"/></svg>
 					</button>
 				</div>
@@ -223,8 +219,48 @@ image = pipe("huggy waving, flat vector, brand yellow").images[0]</code></pre>
 </div>
 
 <!-- ══ Footer action bar ══ -->
-<div class="sticky bottom-0 z-20 border-t border-gray-100 bg-white px-5 py-3">
-	<div class="flex items-center gap-3">
+<div class="sticky bottom-0 z-20 border-t border-gray-100 bg-white px-5 py-2.5">
+	<div class="flex min-h-[2rem] items-center gap-3">
+		<!-- draft selector (the original left-panel drafts list, as a footer popover) -->
+		<div class="relative">
+			<button id="draft-btn" class="flex h-8 items-center gap-2 rounded-lg border border-gray-200 bg-white px-2.5 text-sm hover:bg-gray-50">
+				<img src="assets/chunte.png" class="h-4 w-4 rounded-full" alt="" />
+				<span class="max-w-[220px] truncate font-medium text-gray-800">Designing Huggy: Behind Hugging Face&rsquo;s…</span>
+				<span class="rounded-sm border border-gray-300 px-1 text-xs text-gray-400">unsaved</span>
+				<svg class="h-2.5 w-2.5 text-gray-400" viewBox="0 0 12 7" fill="none"><path d="M1 1L6 6L11 1" stroke="currentColor"/></svg>
+			</button>
+			<div id="draft-popover" class="popover !w-72 p-3">
+				<div class="mb-3 flex flex-col text-[0.9rem]">
+					<div class="mb-2 flex items-center justify-between gap-1.5 font-semibold">
+						<div class="flex items-center gap-1.5">
+							<img src="assets/chunte.png" alt="Chunte" class="h-4 w-4 rounded-full" />
+							Chunte
+						</div>
+						<button title="Create a new Article under your own profile" class="rounded-sm border border-gray-200 p-1 text-gray-500 hover:text-gray-900">
+							<svg class="h-2 w-2" viewBox="0 0 17 17" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 2C9.5 1.17157 8.82843 0.5 8 0.5C7.17157 0.5 6.5 1.17157 6.5 2V7H1.5C0.671573 7 0 7.67157 0 8.5C0 9.32843 0.671573 10 1.5 10H6.5V15C6.5 15.8284 7.17157 16.5 8 16.5C8.82843 16.5 9.5 15.8284 9.5 15V10H14.5C15.3284 10 16 9.32843 16 8.5C16 7.67157 15.3284 7 14.5 7H9.5V2Z"/></svg>
+						</button>
+					</div>
+					<div class="mb-px flex items-center justify-between gap-1.5 truncate rounded-lg bg-black px-1.5 py-0.5 text-gray-200">
+						<span class="truncate">Designing Huggy: Behind Hugging…</span>
+						<div class="rounded-sm border border-gray-400 px-1 py-0 text-xs text-gray-300">unsaved</div>
+					</div>
+					<button class="mb-px flex items-center justify-between gap-1.5 truncate rounded-lg px-1.5 py-0.5 text-left text-gray-500 hover:text-gray-900">
+						<span class="truncate">Test</span>
+					</button>
+				</div>
+				<div class="flex flex-col text-[0.9rem]">
+					<div class="flex items-center justify-between gap-1.5 font-semibold">
+						<div class="flex items-center gap-1.5">
+							<img src="assets/huggingface.png" alt="huggingface" class="h-4 w-4 rounded-sm" />
+							huggingface
+						</div>
+						<button title="Create a new Article under huggingface organization" class="rounded-sm border border-gray-200 p-1 text-gray-500 hover:text-gray-900">
+							<svg class="h-2 w-2" viewBox="0 0 17 17" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 2C9.5 1.17157 8.82843 0.5 8 0.5C7.17157 0.5 6.5 1.17157 6.5 2V7H1.5C0.671573 7 0 7.67157 0 8.5C0 9.32843 0.671573 10 1.5 10H6.5V15C6.5 15.8284 7.17157 16.5 8 16.5C8.82843 16.5 9.5 15.8284 9.5 15V10H14.5C15.3284 10 16 9.32843 16 8.5C16 7.67157 15.3284 7 14.5 7H9.5V2Z"/></svg>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<span class="flex items-center gap-1.5 text-sm text-emerald-600">
 			<span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
 			<span data-saved-label>Saved just now</span>
@@ -256,7 +292,7 @@ image = pipe("huggy waving, flat vector, brand yellow").images[0]</code></pre>
 						<svg class="h-4 w-4" viewBox="0 0 21 20" fill="currentColor"><path d="M16.9756 3.25671H4.47559C4.14407 3.25671 3.82612 3.38183 3.5917 3.60452C3.35728 3.82722 3.22559 4.12927 3.22559 4.44421V16.3192C3.22559 16.6342 3.35728 16.9362 3.5917 17.1589C3.82612 17.3816 4.14407 17.5067 4.47559 17.5067H16.9756C17.3071 17.5067 17.625 17.3816 17.8595 17.1589C18.0939 16.9362 18.2256 16.6342 18.2256 16.3192V4.44421C18.2256 4.12927 18.0939 3.82722 17.8595 3.60452C17.625 3.38183 17.3071 3.25671 16.9756 3.25671ZM16.9756 16.3192H4.47559V12.7567L7.60059 9.78796L11.0943 13.107C11.3285 13.3282 11.6454 13.4523 11.9756 13.4523C12.3058 13.4523 12.6226 13.3282 12.8568 13.107L13.8506 12.163L16.9756 15.1317V16.3192Z"/></svg>
 						Change thumbnail
 					</button>
-					<p class="text-xs font-normal text-gray-500">Recommended size: 1910×1000px (ratio 1.91:1)</p>
+					<p class="text-xs font-normal text-gray-500">Recommended size: 1200×648px (ratio 50:27)</p>
 				</div>
 			</div>
 			<div class="mt-6 flex flex-wrap items-center justify-end gap-2">
@@ -270,7 +306,6 @@ image = pipe("huggy waving, flat vector, brand yellow").images[0]</code></pre>
 <!-- toast + lab switcher -->
 <div id="toast" class="toast"><img src="assets/huggingface_logo-noborder.svg" class="h-5 w-5" alt="" /><span></span></div>
 <nav class="lab-switch">
-	<img src="assets/huggingface_logo-noborder.svg" class="h-4 w-4" alt="" />
 	<span class="px-1 text-[11px] font-bold tracking-wide text-gray-400">UI LAB · BLOG EDITOR</span>
 	<a class="on" href="option-1.html">Option 1</a>
 	<a href="option-2.html">Option 2</a>
