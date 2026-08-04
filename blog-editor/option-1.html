@@ -56,7 +56,7 @@ tailwind.config = {
 
 <!-- ══ Editor header: title + URL builder moved up (Option 1) ══ -->
 <div class="sticky top-0 z-20 border-b border-gray-100 bg-white">
-	<div class="flex items-center justify-between gap-4 px-5 py-3">
+	<div class="mx-auto flex max-w-[1536px] items-center justify-between gap-4 px-5 py-3 xl:pl-56 2xl:pl-72">
 		<div class="flex min-w-0 items-center gap-3">
 			<div class="flex items-center gap-1.5">
 				<svg class="h-5 w-5 min-w-5 text-blue-600" viewBox="0 0 15 15" fill="currentColor"><path d="M3.417 12.75c-.32 0-.596-.114-.824-.342a1.126 1.126 0 0 1-.343-.825V3.417c0-.321.114-.597.343-.824.23-.228.503-.343.824-.343h8.166c.321 0 .596.114.825.343.228.229.342.503.342.824v8.166c0 .32-.114.596-.342.825a1.12 1.12 0 0 1-.825.342zm1.166-2.333h4.084V9.25H4.583v1.167m0-2.334h5.834V6.917H4.583v1.166m0-2.333h5.834V4.583H4.583V5.75"/></svg>
@@ -70,7 +70,8 @@ tailwind.config = {
 		</div>
 	</div>
 	<!-- URL builder row — surfaced at the top instead of buried in the footer -->
-	<div class="flex items-center gap-2 border-t border-gray-50 bg-gray-50/60 px-5 py-2.5 text-sm text-gray-600">
+	<div class="border-t border-gray-50 bg-gray-50/60">
+	<div class="mx-auto flex max-w-[1536px] items-center gap-2 px-5 py-2.5 text-sm text-gray-600 xl:pl-56 2xl:pl-72">
 		<span class="font-medium text-gray-400">Blog URL</span>
 		<span class="max-xl:hidden">https://huggingface.co/blog/</span>
 		<span class="xl:hidden">hf.co/blog/</span>
@@ -87,13 +88,18 @@ tailwind.config = {
 		</span>
 		<span class="ml-1 inline-flex items-center gap-1 text-xs font-medium text-emerald-600"><svg class="h-3 w-3" viewBox="0 0 16 16" fill="currentColor"><path d="M6.5 12.5l-4-4 1.4-1.4 2.6 2.6 5.6-5.6L13.5 5.5z"/></svg>Available</span>
 	</div>
+	</div>
 </div>
 
-<!-- ══ Main split: editor ┃ metadata panel ══ -->
-<div class="flex min-h-[calc(100vh-16rem)] items-stretch">
+<!-- ══ Main split: gradient page bg · empty gutter (xl+) · editor ┃ metadata panel ══ -->
+<div class="bg-gradient-to-t from-gray-50 to-white">
+<div class="mx-auto flex min-h-[calc(100vh-16rem)] max-w-[1536px] items-stretch">
+
+	<!-- empty left area on big screens, like the original editor grid -->
+	<div class="hidden flex-none xl:block xl:w-56 2xl:w-72"></div>
 
 	<!-- Editor pane -->
-	<div class="relative min-w-0 flex-1 border-r border-gray-100 bg-white">
+	<div class="relative min-w-0 flex-1 border-x border-gray-100 bg-white">
 		<!-- preview toggle chip -->
 		<button data-preview-toggle data-state="edit" class="tag absolute right-4 top-3 z-10">
 			<svg class="h-3.5 w-3.5 text-gray-500" viewBox="0 0 24 24" fill="currentColor"><path d="M12 5c-5 0-9 4.5-10 7 1 2.5 5 7 10 7s9-4.5 10-7c-1-2.5-5-7-10-7zm0 11.5A4.5 4.5 0 1 1 16.5 12 4.5 4.5 0 0 1 12 16.5zm0-7A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5z"/></svg>
@@ -158,10 +164,31 @@ image = pipe("huggy waving, flat vector, brand yellow").images[0]</code></pre>
 			<img src="assets/thumb-huggy.svg" alt="Huggy poses" />
 		</div>
 
+		<!-- "Test" draft — the saved-draft example, swapped in via the footer selector -->
+		<div id="md-source-test" data-editor class="cm hidden px-8 py-6">
+<span class="h"># Test</span>
+
+A scratch draft to poke at the Hub blog editor.
+
+- Saved to the server, so it has history
+- Safe to close the tab and come back later
+
+<span class="quote">&gt; Nothing to see here — just testing.</span>
+</div>
+		<div id="md-preview-test" data-editor class="prose-charter hidden max-w-3xl px-10 py-8">
+			<h1>Test</h1>
+			<p>A scratch draft to poke at the Hub blog editor.</p>
+			<ul>
+				<li>Saved to the server, so it has history</li>
+				<li>Safe to close the tab and come back later</li>
+			</ul>
+			<blockquote>Nothing to see here — just testing.</blockquote>
+		</div>
+
 	</div>
 
-	<!-- Metadata panel (Franck-based right rail) -->
-	<aside id="meta-panel" class="w-[420px] flex-none space-y-7 bg-gray-50/40 px-6 py-6 max-lg:hidden">
+	<!-- Metadata panel (Franck-based right rail) — transparent, page gradient shows through -->
+	<aside id="meta-panel" class="w-[420px] flex-none space-y-7 px-6 py-6 max-lg:hidden">
 		<!-- Thumbnail -->
 		<section>
 			<div class="mb-2 flex items-baseline justify-between">
@@ -217,16 +244,17 @@ image = pipe("huggy waving, flat vector, brand yellow").images[0]</code></pre>
 		</section>
 	</aside>
 </div>
+</div>
 
 <!-- ══ Footer action bar ══ -->
-<div class="sticky bottom-0 z-20 border-t border-gray-100 bg-white px-5 py-2.5">
-	<div class="flex min-h-[2rem] items-center gap-3">
+<div class="sticky bottom-0 z-20 border-t border-gray-100 bg-white py-2.5">
+	<div class="mx-auto flex min-h-[2rem] max-w-[1536px] items-center gap-3 px-5 xl:pl-56 2xl:pl-72">
 		<!-- draft selector (the original left-panel drafts list, as a footer popover) -->
 		<div class="relative">
 			<button id="draft-btn" class="flex h-8 items-center gap-2 rounded-lg border border-gray-200 bg-white px-2.5 text-sm hover:bg-gray-50">
 				<img src="assets/chunte.png" class="h-4 w-4 rounded-full" alt="" />
-				<span class="max-w-[220px] truncate font-medium text-gray-800">Designing Huggy: Behind Hugging Face&rsquo;s…</span>
-				<span class="rounded bg-gray-100 px-1.5 py-px text-[11px] font-medium text-gray-500">unsaved</span>
+				<span id="draft-chip-label" class="max-w-[220px] truncate font-medium text-gray-800">Designing Huggy: Behind Hugging Face&rsquo;s…</span>
+				<span id="draft-chip-unsaved" class="rounded bg-gray-100 px-1.5 py-px text-[11px] font-medium text-gray-500">unsaved</span>
 				<svg class="h-2.5 w-2.5 text-gray-400" viewBox="0 0 12 7" fill="none"><path d="M1 1L6 6L11 1" stroke="currentColor"/></svg>
 			</button>
 			<div id="draft-popover" class="popover !w-72 p-3">
@@ -240,11 +268,11 @@ image = pipe("huggy waving, flat vector, brand yellow").images[0]</code></pre>
 							<svg class="h-2 w-2" viewBox="0 0 17 17" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 2C9.5 1.17157 8.82843 0.5 8 0.5C7.17157 0.5 6.5 1.17157 6.5 2V7H1.5C0.671573 7 0 7.67157 0 8.5C0 9.32843 0.671573 10 1.5 10H6.5V15C6.5 15.8284 7.17157 16.5 8 16.5C8.82843 16.5 9.5 15.8284 9.5 15V10H14.5C15.3284 10 16 9.32843 16 8.5C16 7.67157 15.3284 7 14.5 7H9.5V2Z"/></svg>
 						</button>
 					</div>
-					<div class="mb-px flex items-center justify-between gap-1.5 truncate rounded-lg bg-black px-1.5 py-0.5 text-gray-200">
+					<button id="row-huggy" data-draft="huggy" class="mb-px flex w-full items-center justify-between gap-1.5 truncate rounded-lg bg-black px-1.5 py-0.5 text-left text-gray-200">
 						<span class="truncate">Designing Huggy: Behind Hugging…</span>
-						<div class="rounded bg-white/20 px-1.5 py-px text-[11px] font-medium text-gray-100">unsaved</div>
-					</div>
-					<button class="mb-px flex items-center justify-between gap-1.5 truncate rounded-lg px-1.5 py-0.5 text-left text-gray-500 hover:text-gray-900">
+						<span id="row-huggy-unsaved" class="rounded bg-white/20 px-1.5 py-px text-[11px] font-medium text-gray-100">unsaved</span>
+					</button>
+					<button id="row-test" data-draft="test" class="mb-px flex w-full items-center justify-between gap-1.5 truncate rounded-lg px-1.5 py-0.5 text-left text-gray-500 hover:text-gray-900">
 						<span class="truncate">Test</span>
 					</button>
 				</div>
@@ -261,14 +289,19 @@ image = pipe("huggy waving, flat vector, brand yellow").images[0]</code></pre>
 				</div>
 			</div>
 		</div>
-		<span class="flex items-center gap-1.5 text-sm text-emerald-600">
-			<span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
-			<span data-saved-label>Saved just now</span>
+		<!-- save state: unsaved (new draft) vs saved (existing draft) -->
+		<span id="status-unsaved" class="flex items-center gap-1.5 text-sm text-gray-500">
+			<span class="h-1.5 w-1.5 rounded-full bg-amber-400"></span>
+			Unsaved changes
 		</span>
-		<button class="text-sm text-gray-400 underline-offset-2 hover:text-gray-600 hover:underline">History</button>
+		<span id="status-saved" class="hidden items-center gap-1.5 text-sm text-emerald-600">
+			<span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+			<span data-saved-label>Saved 2 min ago</span>
+		</span>
+		<button id="history-btn" class="hidden text-sm text-gray-400 underline-offset-2 hover:text-gray-600 hover:underline">History</button>
 		<span class="flex-1"></span>
-		<button class="pill pill-danger">Delete draft</button>
-		<button class="pill pill-secondary">Save as draft</button>
+		<button id="btn-delete" class="pill pill-danger hidden">Delete draft</button>
+		<button id="btn-save" class="pill pill-secondary">Save as draft</button>
 		<button data-publish-open class="pill pill-primary">Publish</button>
 	</div>
 </div>
