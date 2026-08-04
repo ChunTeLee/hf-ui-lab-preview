@@ -84,11 +84,11 @@ tailwind.config = {
 					<svg class="h-2 w-2" viewBox="0 0 17 17" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.5 2C9.5 1.17157 8.82843 0.5 8 0.5C7.17157 0.5 6.5 1.17157 6.5 2V7H1.5C0.671573 7 0 7.67157 0 8.5C0 9.32843 0.671573 10 1.5 10H6.5V15C6.5 15.8284 7.17157 16.5 8 16.5C8.82843 16.5 9.5 15.8284 9.5 15V10H14.5C15.3284 10 16 9.32843 16 8.5C16 7.67157 15.3284 7 14.5 7H9.5V2Z"/></svg>
 				</button>
 			</div>
-			<div class="mb-px flex items-center justify-between gap-1.5 truncate rounded-lg bg-black px-1.5 py-0.5 text-gray-200">
+			<button id="o2-row-huggy" class="mb-px flex w-full items-center justify-between gap-1.5 truncate rounded-lg bg-black px-1.5 py-0.5 text-left text-gray-200">
 				<span class="truncate">Designing Huggy: Behind Hugging…</span>
-				<div id="sidebar-unsaved-chip" class="rounded bg-white/20 px-1.5 py-px text-[11px] font-medium text-gray-100">unsaved</div>
-			</div>
-			<button class="mb-px flex items-center justify-between gap-1.5 truncate rounded-lg px-1.5 py-0.5 text-left text-gray-500 hover:text-gray-900">
+				<span id="sidebar-unsaved-chip" class="rounded bg-white/20 px-1.5 py-px text-[11px] font-medium text-gray-100">unsaved</span>
+			</button>
+			<button id="o2-row-test" class="mb-px flex w-full items-center justify-between gap-1.5 truncate rounded-lg px-1.5 py-0.5 text-left text-gray-500 hover:text-gray-900">
 				<span class="truncate">Test</span>
 			</button>
 		</div>
@@ -176,6 +176,27 @@ image = pipe("huggy waving, flat vector, brand yellow").images[0]</code></pre>
 			<img src="assets/thumb-huggy.svg" alt="Huggy poses" />
 		</div>
 
+		<!-- "Test" draft — the saved-draft example, selected from the drafts sidebar -->
+		<div id="md-source-test" data-editor class="cm hidden px-8 py-6 pb-14">
+<span class="h"># Test</span>
+
+A scratch draft to poke at the Hub blog editor.
+
+- Saved to the server, so it has history
+- Safe to close the tab and come back later
+
+<span class="quote">&gt; Nothing to see here — just testing.</span>
+</div>
+		<div id="md-preview-test" data-editor class="prose-charter hidden max-w-3xl px-10 py-8 pb-14">
+			<h1>Test</h1>
+			<p>A scratch draft to poke at the Hub blog editor.</p>
+			<ul>
+				<li>Saved to the server, so it has history</li>
+				<li>Safe to close the tab and come back later</li>
+			</ul>
+			<blockquote>Nothing to see here — just testing.</blockquote>
+		</div>
+
 	</div>
 
 	<!-- Help chips (syntax guide collapsed to chips — Option 2) -->
@@ -222,45 +243,52 @@ image = pipe("huggy waving, flat vector, brand yellow").images[0]</code></pre>
 
 <!-- ══ Footer: settings expand the footer upward, like the original bottom bar ══ -->
 <div class="sticky bottom-0 z-20 border-t border-gray-100 bg-white">
-	<!-- settings rows revealed above the controls; the footer simply grows taller -->
-	<div id="settings-panel" class="hidden border-b border-gray-100 bg-gray-50/60">
-		<div class="mx-auto max-w-[1536px] space-y-3 px-4 py-3.5">
-			<div class="flex items-center gap-3 text-sm text-gray-600">
-				<span class="w-20 flex-none text-xs font-semibold uppercase tracking-wide text-gray-400">URL</span>
-				<span class="max-sm:hidden">hf.co/blog/</span>
-				<select class="form-input !mt-0 !w-auto min-w-fit leading-tight">
-					<option selected>Chunte</option>
-					<option>dev-mode-explorers</option>
-					<option>huggingface</option>
-					<option>social-post-explorers</option>
-				</select>
-				<span>/</span>
-				<input class="form-input !mt-0 max-w-xs flex-1 font-mono !text-[13px] leading-tight" value="designing-huggy" />
-				<span class="hf-tip inline-flex cursor-default text-gray-400" data-tip="The URL of the blog post. Organizations must subscribe to Team or Enterprise to host articles.">
-					<svg class="h-4 w-4" viewBox="0 0 32 32" fill="currentColor"><path d="M17 22v-8h-4v2h2v6h-3v2h8v-2h-3z"/><path d="M16 8a1.5 1.5 0 1 0 1.5 1.5A1.5 1.5 0 0 0 16 8z"/><path d="M16 30a14 14 0 1 1 14-14a14 14 0 0 1-14 14zm0-26a12 12 0 1 0 12 12A12 12 0 0 0 16 4z"/></svg>
-				</span>
-			</div>
-			<div class="flex items-center gap-3">
-				<span class="w-20 flex-none text-xs font-semibold uppercase tracking-wide text-gray-400">Thumbnail</span>
-				<div data-thumb-filled class="relative h-10 overflow-hidden rounded-lg border bg-gray-100">
-					<img src="assets/thumb-huggy.svg" class="aspect-[50/27] h-10 w-auto object-cover object-center" alt="blog thumbnail" />
-					<button data-thumb-replace title="Replace thumbnail" class="thumb-replace !right-0.5 !top-0.5 !p-0.5">
-						<svg class="h-2.5 w-2.5" viewBox="0 0 21 20" fill="currentColor"><path d="M16.9756 3.25671H4.47559C4.14407 3.25671 3.82612 3.38183 3.5917 3.60452C3.35728 3.82722 3.22559 4.12927 3.22559 4.44421V16.3192C3.22559 16.6342 3.35728 16.9362 3.5917 17.1589C3.82612 17.3816 4.14407 17.5067 4.47559 17.5067H16.9756C17.3071 17.5067 17.625 17.3816 17.8595 17.1589C18.0939 16.9362 18.2256 16.6342 18.2256 16.3192V4.44421C18.2256 4.12927 18.0939 3.82722 17.8595 3.60452C17.625 3.38183 17.3071 3.25671 16.9756 3.25671ZM16.9756 16.3192H4.47559V12.7567L7.60059 9.78796L11.0943 13.107C11.3285 13.3282 11.6454 13.4523 11.9756 13.4523C12.3058 13.4523 12.6226 13.3282 12.8568 13.107L13.8506 12.163L16.9756 15.1317V16.3192Z"/></svg>
-					</button>
+	<!-- settings revealed above the controls: same white surface, the footer just grows.
+	     Two columns — URL + Coauthors stacked on the left, Thumbnail on the right. -->
+	<div id="settings-panel" class="hidden">
+		<div class="mx-auto max-w-[1536px] px-4 pb-1 pt-4">
+			<div class="flex flex-wrap items-start gap-x-14 gap-y-4">
+				<div class="flex min-w-0 flex-col gap-5">
+					<div class="flex flex-col gap-1.5">
+						<span class="text-xs font-semibold uppercase tracking-wide text-gray-400">URL</span>
+						<div class="flex items-center gap-1.5 text-sm text-gray-600">
+							<span class="max-sm:hidden">hf.co/blog/</span>
+							<select class="form-input !mt-0 !w-auto min-w-fit leading-tight">
+								<option selected>Chunte</option>
+								<option>dev-mode-explorers</option>
+								<option>huggingface</option>
+								<option>social-post-explorers</option>
+							</select>
+							<span>/</span>
+							<input class="form-input !mt-0 w-64 font-mono !text-[13px] leading-tight" value="designing-huggy" />
+							<span class="hf-tip inline-flex cursor-default text-gray-400" data-tip="The URL of the blog post. Organizations must subscribe to Team or Enterprise to host articles.">
+								<svg class="h-4 w-4" viewBox="0 0 32 32" fill="currentColor"><path d="M17 22v-8h-4v2h2v6h-3v2h8v-2h-3z"/><path d="M16 8a1.5 1.5 0 1 0 1.5 1.5A1.5 1.5 0 0 0 16 8z"/><path d="M16 30a14 14 0 1 1 14-14a14 14 0 0 1-14 14zm0-26a12 12 0 1 0 12 12A12 12 0 0 0 16 4z"/></svg>
+							</span>
+						</div>
+					</div>
+					<div class="flex flex-col gap-1.5">
+						<span class="text-xs font-semibold uppercase tracking-wide text-gray-400">Coauthors</span>
+						<div class="flex flex-wrap items-center gap-1.5">
+							<span class="tag !cursor-default"><img src="assets/chunte.png" class="h-4 w-4 rounded-full" alt="" />Chunte <span class="text-xs text-gray-400">you</span></span>
+							<span class="tag group !cursor-default"><span class="flex h-4 w-4 items-center justify-center rounded-full bg-indigo-100 text-[9px] font-bold text-indigo-600">J</span>julien-c
+								<button class="text-gray-400 opacity-0 transition-opacity hover:text-red-500 group-hover:opacity-100"><svg class="h-3 w-3" viewBox="0 0 32 32" fill="currentColor"><path d="M24 9.4L22.6 8L16 14.6L9.4 8L8 9.4l6.6 6.6L8 22.6L9.4 24l6.6-6.6l6.6 6.6l1.4-1.4l-6.6-6.6L24 9.4z"/></svg></button>
+							</span>
+							<input class="w-32 rounded-lg border border-dashed border-gray-300 px-2 py-1 text-sm placeholder-gray-400 outline-none focus:border-gray-400" placeholder="+ Add coauthor" />
+							<span class="hf-tip cursor-default text-gray-400" data-tip="Authors must be following you on hf.co to be added as a coauthor.">
+								<svg class="h-4 w-4" viewBox="0 0 32 32" fill="currentColor"><path d="M17 22v-8h-4v2h2v6h-3v2h8v-2h-3z"/><path d="M16 8a1.5 1.5 0 1 0 1.5 1.5A1.5 1.5 0 0 0 16 8z"/><path d="M16 30a14 14 0 1 1 14-14a14 14 0 0 1-14 14zm0-26a12 12 0 1 0 12 12A12 12 0 0 0 16 4z"/></svg>
+							</span>
+						</div>
+					</div>
 				</div>
-				<span class="text-xs text-gray-400">Recommended 1200×648 · used on the blog feed · required to be featured</span>
-			</div>
-			<div class="flex items-center gap-3">
-				<span class="w-20 flex-none text-xs font-semibold uppercase tracking-wide text-gray-400">Coauthors</span>
-				<div class="flex flex-wrap items-center gap-1.5">
-					<span class="tag !cursor-default"><img src="assets/chunte.png" class="h-4 w-4 rounded-full" alt="" />Chunte <span class="text-xs text-gray-400">you</span></span>
-					<span class="tag group !cursor-default"><span class="flex h-4 w-4 items-center justify-center rounded-full bg-indigo-100 text-[9px] font-bold text-indigo-600">J</span>julien-c
-						<button class="text-gray-400 opacity-0 transition-opacity hover:text-red-500 group-hover:opacity-100"><svg class="h-3 w-3" viewBox="0 0 32 32" fill="currentColor"><path d="M24 9.4L22.6 8L16 14.6L9.4 8L8 9.4l6.6 6.6L8 22.6L9.4 24l6.6-6.6l6.6 6.6l1.4-1.4l-6.6-6.6L24 9.4z"/></svg></button>
-					</span>
-					<input class="w-32 rounded-lg border border-dashed border-gray-300 px-2 py-1 text-sm placeholder-gray-400 outline-none focus:border-gray-400" placeholder="+ Add coauthor" />
-					<span class="hf-tip cursor-default text-gray-400" data-tip="Authors must be following you on hf.co to be added as a coauthor.">
-						<svg class="h-4 w-4" viewBox="0 0 32 32" fill="currentColor"><path d="M17 22v-8h-4v2h2v6h-3v2h8v-2h-3z"/><path d="M16 8a1.5 1.5 0 1 0 1.5 1.5A1.5 1.5 0 0 0 16 8z"/><path d="M16 30a14 14 0 1 1 14-14a14 14 0 0 1-14 14zm0-26a12 12 0 1 0 12 12A12 12 0 0 0 16 4z"/></svg>
-					</span>
+				<div class="flex flex-col gap-1.5">
+					<span class="text-xs font-semibold uppercase tracking-wide text-gray-400">Thumbnail</span>
+					<div data-thumb-filled class="relative aspect-[50/27] w-56 overflow-hidden rounded-lg border border-gray-200 bg-gray-100">
+						<img src="assets/thumb-huggy.svg" class="h-full w-full object-cover object-center" alt="blog thumbnail" />
+						<button data-thumb-replace title="Replace thumbnail" class="thumb-replace">
+							<svg class="h-3.5 w-3.5" viewBox="0 0 21 20" fill="currentColor"><path d="M16.9756 3.25671H4.47559C4.14407 3.25671 3.82612 3.38183 3.5917 3.60452C3.35728 3.82722 3.22559 4.12927 3.22559 4.44421V16.3192C3.22559 16.6342 3.35728 16.9362 3.5917 17.1589C3.82612 17.3816 4.14407 17.5067 4.47559 17.5067H16.9756C17.3071 17.5067 17.625 17.3816 17.8595 17.1589C18.0939 16.9362 18.2256 16.6342 18.2256 16.3192V4.44421C18.2256 4.12927 18.0939 3.82722 17.8595 3.60452C17.625 3.38183 17.3071 3.25671 16.9756 3.25671ZM16.9756 16.3192H4.47559V12.7567L7.60059 9.78796L11.0943 13.107C11.3285 13.3282 11.6454 13.4523 11.9756 13.4523C12.3058 13.4523 12.6226 13.3282 12.8568 13.107L13.8506 12.163L16.9756 15.1317V16.3192Z"/></svg>
+						</button>
+					</div>
+					<span class="text-xs text-gray-400">Recommended 1200×648 · required to be featured</span>
 				</div>
 			</div>
 		</div>

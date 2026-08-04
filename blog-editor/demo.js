@@ -179,24 +179,54 @@ if (settingsPanel) {
 	});
 }
 
-// ── Option 2: save flow — never-saved starts as "Save as draft";
-// after the first save the button becomes save + history segments
-const historySeg = document.getElementById("btn-history");
-if (historySeg && !document.getElementById("row-test")) {
+// ── Option 2: drafts sidebar switching + save lifecycle.
+// "Designing Huggy" starts never-saved (amber status, plain "Save as draft");
+// "Test" is the saved example (green status, split Update draft + history).
+const o2RowHuggy = document.getElementById("o2-row-huggy");
+const o2RowTest = document.getElementById("o2-row-test");
+if (o2RowHuggy && o2RowTest) {
+	const O2_CUR = "mb-px flex w-full items-center justify-between gap-1.5 truncate rounded-lg bg-black px-1.5 py-0.5 text-left text-gray-200";
+	const O2_PLAIN = "mb-px flex w-full items-center justify-between gap-1.5 truncate rounded-lg px-1.5 py-0.5 text-left text-gray-500 hover:text-gray-900";
+	const o2Saved = { huggy: false, test: true };
+	const o2SavedAtMs = { huggy: 0, test: Date.now() - 120000 };
 	const saveB = document.getElementById("btn-save");
+	const historySeg = document.getElementById("btn-history");
+	const chip = document.getElementById("sidebar-unsaved-chip");
+	function renderO2() {
+		const isTest = currentDraft === "test";
+		// editor panes — always come back in edit mode
+		document.getElementById("md-source").classList.toggle("hidden", isTest);
+		document.getElementById("md-source-test").classList.toggle("hidden", !isTest);
+		document.getElementById("md-preview").classList.add("hidden");
+		document.getElementById("md-preview-test").classList.add("hidden");
+		document.querySelectorAll("[data-preview-toggle] .lbl").forEach(l => (l.textContent = "Preview"));
+		// sidebar rows (unsaved chip travels with the huggy row, dark on current)
+		o2RowHuggy.className = isTest ? O2_PLAIN : O2_CUR;
+		o2RowTest.className = isTest ? O2_CUR : O2_PLAIN;
+		chip.className = isTest ? CHIP_ON_LIGHT : CHIP_ON_DARK;
+		chip.style.display = o2Saved.huggy ? "none" : "";
+		// footer save state for the active draft
+		const isSaved = o2Saved[currentDraft];
+		document.getElementById("status-unsaved").style.display = isSaved ? "none" : "flex";
+		document.getElementById("status-saved").style.display = isSaved ? "flex" : "none";
+		saveB.textContent = isSaved ? "Update draft" : "Save as draft";
+		historySeg.style.display = isSaved ? "flex" : "none";
+		if (isSaved) {
+			savedSeconds = Math.max(0, Math.round((Date.now() - o2SavedAtMs[currentDraft]) / 1000));
+			renderSaved();
+		}
+	}
+	o2RowHuggy.addEventListener("click", () => { currentDraft = "huggy"; renderO2(); });
+	o2RowTest.addEventListener("click", () => { currentDraft = "test"; renderO2(); });
 	saveB.addEventListener("click", () => {
-		saveB.textContent = "Update draft";
-		historySeg.classList.remove("hidden");
-		historySeg.classList.add("flex");
-		document.getElementById("status-unsaved").style.display = "none";
-		document.getElementById("status-saved").style.display = "flex";
-		const chip = document.getElementById("sidebar-unsaved-chip");
-		if (chip) chip.style.display = "none";
-		savedSeconds = 0;
-		renderSaved();
-		showToast("Draft saved — demo only 🤗");
+		const first = !o2Saved[currentDraft];
+		o2Saved[currentDraft] = true;
+		o2SavedAtMs[currentDraft] = Date.now();
+		renderO2();
+		showToast(first ? "Draft saved — demo only 🤗" : "Draft updated — demo only 🤗");
 	});
 	historySeg.addEventListener("click", () => showToast("Version history would open here — demo only"));
+	renderO2();
 }
 
 // ── Authors label: "Coauthors" once more than one author is listed
