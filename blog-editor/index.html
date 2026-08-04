@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HF Blog Editor — design explorations</title>
+<link rel="icon" href="assets/huggingface_logo-noborder.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = { theme: { extend: { fontFamily: { sans: ['"Source Sans Pro"','"Source Sans 3"',"ui-sans-serif","system-ui","sans-serif"], mono: ['"IBM Plex Mono"',"monospace"] } } } };
+</script>
+<link rel="stylesheet" href="hf.css" />
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+<main class="mx-auto max-w-3xl px-6 py-16">
+	<div class="mb-10 flex items-center gap-3">
+		<img src="assets/huggingface_logo-noborder.svg" class="h-10 w-10" alt="Hugging Face" />
+		<div>
+			<h1 class="text-2xl font-bold text-black">Blog Editor — design explorations</h1>
+			<p class="text-sm text-gray-500">Interactive demos built with real moon-landing components, icons and type. Nothing here talks to a backend.</p>
+		</div>
+	</div>
+
+	<div class="grid gap-4 sm:grid-cols-2">
+		<a href="option-1.html" class="group rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md">
+			<div class="mb-1 text-xs font-bold uppercase tracking-wide text-gray-400">Option 1 · Franck-based</div>
+			<h2 class="mb-2 text-lg font-semibold text-black group-hover:underline">Editor + article settings panel</h2>
+			<p class="text-sm text-gray-500">The URL moves to the top; thumbnail and authors live in a persistent, collapsible right panel with a big 1.91:1 preview. Footer keeps last-saved status, delete, draft and publish.</p>
+		</a>
+		<a href="option-2.html" class="group rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md">
+			<div class="mb-1 text-xs font-bold uppercase tracking-wide text-gray-400">Option 2 · Simplify</div>
+			<h2 class="mb-2 text-lg font-semibold text-black group-hover:underline">One quiet canvas</h2>
+			<p class="text-sm text-gray-500">No Edit/Preview tabs — preview is a toggle on the editor itself. The syntax guide collapses to chips and all metadata tucks behind an “Article settings” popover in the footer.</p>
+		</a>
+	</div>
+
+	<div class="mt-8 space-y-1.5 text-sm text-gray-500">
+		<p><span class="font-semibold text-gray-700">Try:</span> the Preview toggle, the Publish modal, Option 1’s panel-collapse handle, Option 2’s Article settings, removing/re-adding the thumbnail.</p>
+		<p><span class="font-semibold text-gray-700">Sources:</span> layouts from Chunte’s Figma sketches; components, icons, logo and type ported from the latest <span class="font-mono text-xs">moon-landing</span> (CommunityBlogEditorForm, BlogPublishModal, components.css, ThemeSwitcher).</p>
+	</div>
+</main>
+</body>
+</html>
