@@ -75,14 +75,32 @@ document.querySelectorAll("[data-preview-toggle]").forEach(btn =>
 	})
 );
 
-// ── Option 1: collapse the metadata panel (iOS-style handle zone)
+// ── Option 1: collapse the metadata panel (iOS-style handle zone).
+// Desktop: in-flow rail, open by default. Below lg: right drawer, collapsed by default.
 const metaPanel = document.getElementById("meta-panel");
 const collapseBtn = document.getElementById("collapse-handle");
 if (metaPanel && collapseBtn) {
-	collapseBtn.addEventListener("click", () => {
+	const smallScreen = window.matchMedia("(max-width: 1023.5px)");
+	const togglePanel = () => {
 		const closed = metaPanel.classList.toggle("hidden");
 		collapseBtn.title = closed ? "Show article settings" : "Hide article settings";
-	});
+	};
+	collapseBtn.addEventListener("click", togglePanel);
+	const panelClose = document.getElementById("panel-close");
+	if (panelClose) panelClose.addEventListener("click", togglePanel);
+	// sensible default per breakpoint, re-applied only when the viewport crosses lg
+	// (resize fallback because emulated viewports don't always fire matchMedia change)
+	const applyDefault = () => metaPanel.classList.toggle("hidden", smallScreen.matches);
+	applyDefault();
+	let wasSmall = smallScreen.matches;
+	const syncBreakpoint = () => {
+		if (smallScreen.matches !== wasSmall) {
+			wasSmall = smallScreen.matches;
+			applyDefault();
+		}
+	};
+	smallScreen.addEventListener("change", syncBreakpoint);
+	window.addEventListener("resize", syncBreakpoint);
 }
 
 // ── Footer popovers (Option 2 settings · Option 1 draft selector)

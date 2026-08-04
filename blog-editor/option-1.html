@@ -218,8 +218,13 @@ A scratch draft to poke at the Hub blog editor.
 
 	</div>
 
-	<!-- Metadata panel (Franck-based right rail) — transparent, page gradient shows through -->
-	<aside id="meta-panel" class="w-[420px] flex-none space-y-7 px-6 py-6 max-lg:hidden">
+	<!-- Metadata panel (Franck-based right rail) — transparent on desktop;
+	     below lg it becomes a right drawer over the content, toggled by the handle -->
+	<aside id="meta-panel" class="relative w-[420px] flex-none space-y-7 px-6 py-6 max-lg:fixed max-lg:inset-y-0 max-lg:right-0 max-lg:z-40 max-lg:w-[min(420px,88vw)] max-lg:overflow-y-auto max-lg:border-l max-lg:border-gray-100 max-lg:bg-white max-lg:pl-8 max-lg:shadow-2xl">
+		<!-- drawer close handle (small screens only) -->
+		<button id="panel-close" class="absolute left-0 top-1/2 flex h-24 w-6 -translate-y-1/2 items-center justify-center opacity-50 transition-opacity hover:opacity-100 lg:hidden" title="Hide article settings">
+			<span class="ios-handle"></span>
+		</button>
 		<!-- Thumbnail -->
 		<section>
 			<div class="mb-2 flex items-baseline justify-between">
