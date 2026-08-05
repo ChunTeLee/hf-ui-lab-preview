@@ -142,7 +142,7 @@ if (settingsPop || draftPop || syntaxPop) {
 // ── Option 1: draft switching — unsaved new draft ⇄ saved "Test" draft
 const ROW_CURRENT = "mb-px flex w-full items-center justify-between gap-1.5 truncate rounded-lg bg-black px-1.5 py-0.5 text-left text-gray-200";
 const ROW_PLAIN = "mb-px flex w-full items-center justify-between gap-1.5 truncate rounded-lg px-1.5 py-0.5 text-left text-gray-500 hover:text-gray-900";
-const CHIP_ON_DARK = "rounded bg-white/90 px-1.5 py-px text-[11px] font-medium text-gray-900";
+const CHIP_ON_DARK = "rounded bg-white/30 px-1.5 py-px text-[11px] font-medium text-white";
 const CHIP_ON_LIGHT = "rounded bg-gray-200 px-1.5 py-px text-[11px] font-medium text-gray-600";
 function selectDraft(id) {
 	const rowH = document.getElementById("row-huggy");
