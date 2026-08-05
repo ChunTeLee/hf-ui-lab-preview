@@ -51,9 +51,12 @@ function showToast(msg) {
 
 // ── Edit / Preview toggle (chip on the editor) — pane ids depend on the active draft
 let currentDraft = "huggy";
-const activePaneIds = () => currentDraft === "test"
-	? { src: "md-source-test", prev: "md-preview-test" }
-	: { src: "md-source", prev: "md-preview" };
+const PANES = {
+	huggy: { src: "md-source", prev: "md-preview" },
+	test:  { src: "md-source-test", prev: "md-preview-test" },
+	new:   { src: "md-source-new", prev: "md-preview-new" },
+};
+const activePaneIds = () => PANES[currentDraft] || PANES.huggy;
 document.querySelectorAll("[data-preview-toggle]").forEach(btn =>
 	btn.addEventListener("click", () => {
 		const ids = activePaneIds();
@@ -139,39 +142,78 @@ if (settingsPop || draftPop || syntaxPop) {
 	document.addEventListener("click", () => closeSettings());
 }
 
+// the empty draft's inline assist links straight to the full syntax guide
+const scaffoldGuideLink = document.getElementById("scaffold-guide-link");
+if (scaffoldGuideLink && syntaxPop) {
+	scaffoldGuideLink.addEventListener("click", e => {
+		e.stopPropagation();
+		closeSettings();
+		syntaxPop.classList.add("open");
+	});
+}
+
 // ── Option 1: draft switching — unsaved new draft ⇄ saved "Test" draft
 const ROW_CURRENT = "mb-px flex w-full items-center justify-between gap-1.5 truncate rounded-lg bg-black px-1.5 py-0.5 text-left text-gray-200";
 const ROW_PLAIN = "mb-px flex w-full items-center justify-between gap-1.5 truncate rounded-lg px-1.5 py-0.5 text-left text-gray-500 hover:text-gray-900";
 const CHIP_ON_DARK = "rounded bg-white/30 px-1.5 py-px text-[11px] font-medium text-white";
 const CHIP_ON_LIGHT = "rounded bg-gray-200 px-1.5 py-px text-[11px] font-medium text-gray-600";
+const DRAFT_TITLES = {
+	huggy: "Designing Huggy: Behind Hugging Face’s…",
+	test:  "Testing the community blog editor end to end",
+	new:   "Untitled",
+};
+const DRAFT_SLUGS = { huggy: "designing-huggy", test: "testing-the-community-blog-editor", new: "" };
+function setThumbFilled(filled) {
+	document.querySelectorAll("[data-thumb-filled]").forEach(el => el.classList.toggle("hidden", !filled));
+	document.querySelectorAll("[data-thumb-empty]").forEach(el => el.classList.toggle("hidden", filled));
+}
 function selectDraft(id) {
-	const rowH = document.getElementById("row-huggy");
-	const rowT = document.getElementById("row-test");
-	if (!rowH || !rowT) return;
+	const rows = {
+		huggy: document.getElementById("row-huggy"),
+		test:  document.getElementById("row-test"),
+		new:   document.getElementById("row-new"),
+	};
+	if (!rows.huggy || !rows.test) return;
 	currentDraft = id;
 	// swap editor panes; always come back in edit mode
-	document.getElementById("md-source").classList.toggle("hidden", id !== "huggy");
-	document.getElementById("md-source-test").classList.toggle("hidden", id !== "test");
-	document.getElementById("md-preview").classList.add("hidden");
-	document.getElementById("md-preview-test").classList.add("hidden");
+	Object.entries(PANES).forEach(([key, pane]) => {
+		const src = document.getElementById(pane.src);
+		const prev = document.getElementById(pane.prev);
+		if (src) src.classList.toggle("hidden", key !== id);
+		if (prev) prev.classList.add("hidden");
+	});
 	document.querySelectorAll("[data-preview-toggle] .lbl").forEach(l => (l.textContent = "Preview"));
 	// footer draft selector chip
-	document.getElementById("draft-chip-label").textContent =
-		id === "huggy" ? "Designing Huggy: Behind Hugging Face’s…" : "Testing the community blog editor end to end";
+	document.getElementById("draft-chip-label").textContent = DRAFT_TITLES[id];
 	document.getElementById("draft-chip-unsaved").style.display = id === "huggy" ? "" : "none";
 	// popover rows
-	rowH.className = id === "huggy" ? ROW_CURRENT : ROW_PLAIN;
+	Object.entries(rows).forEach(([key, row]) => {
+		if (row) row.className = key === id ? ROW_CURRENT : ROW_PLAIN;
+	});
 	document.getElementById("row-huggy-unsaved").className = id === "huggy" ? CHIP_ON_DARK : CHIP_ON_LIGHT;
-	rowT.className = id === "test" ? ROW_CURRENT : ROW_PLAIN;
-	// save-state cluster: unsaved → no history/no delete, "Save as draft";
-	// saved → green status + History, "Update draft" (like the real editor's draft state)
+	// save-state cluster: never-typed → nothing to save; unsaved → no history/no delete;
+	// saved → status + History + "Update draft" (like the real editor's draft state)
 	document.getElementById("status-unsaved").style.display = id === "huggy" ? "flex" : "none";
+	const statusEmpty = document.getElementById("status-empty");
+	if (statusEmpty) statusEmpty.style.display = id === "new" ? "flex" : "none";
 	document.getElementById("status-saved").style.display = id === "test" ? "inline" : "none";
 	const savedDot = document.getElementById("saved-dot");
 	if (savedDot) savedDot.style.display = id === "test" ? "inline" : "none";
 	document.getElementById("history-btn").style.display = id === "test" ? "inline-block" : "none";
 	document.getElementById("btn-delete").style.display = id === "test" ? "inline-block" : "none";
-	document.getElementById("btn-save").textContent = id === "test" ? "Update draft" : "Save as draft";
+	const saveBtn = document.getElementById("btn-save");
+	saveBtn.textContent = id === "test" ? "Update draft" : "Save as draft";
+	saveBtn.disabled = id === "new";
+	// an untouched article has no slug, no cover and only you on the byline
+	const slug = document.getElementById("slug-input");
+	if (slug) slug.value = DRAFT_SLUGS[id];
+	const avail = document.getElementById("slug-available");
+	if (avail) avail.style.display = id === "new" ? "none" : "";
+	setThumbFilled(id !== "new");
+	const julien = document.getElementById("coauthor-julien");
+	if (julien) julien.style.display = id === "new" ? "none" : "flex";
+	const authorsLabel = document.querySelector("[data-authors-label]");
+	if (authorsLabel) authorsLabel.textContent = id === "new" ? "Authors" : "Coauthors";
 	if (id === "test") { savedSeconds = 120; renderSaved(); }
 	closeSettings();
 }
