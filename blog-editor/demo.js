@@ -81,16 +81,25 @@ const metaPanel = document.getElementById("meta-panel");
 const collapseBtn = document.getElementById("collapse-handle");
 if (metaPanel && collapseBtn) {
 	const smallScreen = window.matchMedia("(max-width: 1023.5px)");
+	// the gear only shows while the panel is collapsed (it advertises what's behind the handle)
+	const gearIcon = collapseBtn.querySelector(".zone-gear");
+	const syncGear = () => {
+		if (gearIcon) gearIcon.style.display = metaPanel.classList.contains("hidden") ? "" : "none";
+	};
 	const togglePanel = () => {
 		const closed = metaPanel.classList.toggle("hidden");
 		collapseBtn.title = closed ? "Show article settings" : "Hide article settings";
+		syncGear();
 	};
 	collapseBtn.addEventListener("click", togglePanel);
 	const panelClose = document.getElementById("panel-close");
 	if (panelClose) panelClose.addEventListener("click", togglePanel);
 	// sensible default per breakpoint, re-applied only when the viewport crosses lg
 	// (resize fallback because emulated viewports don't always fire matchMedia change)
-	const applyDefault = () => metaPanel.classList.toggle("hidden", smallScreen.matches);
+	const applyDefault = () => {
+		metaPanel.classList.toggle("hidden", smallScreen.matches);
+		syncGear();
+	};
 	applyDefault();
 	let wasSmall = smallScreen.matches;
 	const syncBreakpoint = () => {
@@ -133,8 +142,8 @@ if (settingsPop || draftPop || syntaxPop) {
 // ── Option 1: draft switching — unsaved new draft ⇄ saved "Test" draft
 const ROW_CURRENT = "mb-px flex w-full items-center justify-between gap-1.5 truncate rounded-lg bg-black px-1.5 py-0.5 text-left text-gray-200";
 const ROW_PLAIN = "mb-px flex w-full items-center justify-between gap-1.5 truncate rounded-lg px-1.5 py-0.5 text-left text-gray-500 hover:text-gray-900";
-const CHIP_ON_DARK = "rounded bg-white/20 px-1.5 py-px text-[11px] font-medium text-gray-100";
-const CHIP_ON_LIGHT = "rounded bg-gray-100 px-1.5 py-px text-[11px] font-medium text-gray-500";
+const CHIP_ON_DARK = "rounded bg-white/90 px-1.5 py-px text-[11px] font-medium text-gray-900";
+const CHIP_ON_LIGHT = "rounded bg-gray-200 px-1.5 py-px text-[11px] font-medium text-gray-600";
 function selectDraft(id) {
 	const rowH = document.getElementById("row-huggy");
 	const rowT = document.getElementById("row-test");
@@ -157,7 +166,9 @@ function selectDraft(id) {
 	// save-state cluster: unsaved → no history/no delete, "Save as draft";
 	// saved → green status + History, "Update draft" (like the real editor's draft state)
 	document.getElementById("status-unsaved").style.display = id === "huggy" ? "flex" : "none";
-	document.getElementById("status-saved").style.display = id === "test" ? "flex" : "none";
+	document.getElementById("status-saved").style.display = id === "test" ? "inline" : "none";
+	const savedDot = document.getElementById("saved-dot");
+	if (savedDot) savedDot.style.display = id === "test" ? "inline" : "none";
 	document.getElementById("history-btn").style.display = id === "test" ? "inline-block" : "none";
 	document.getElementById("btn-delete").style.display = id === "test" ? "inline-block" : "none";
 	document.getElementById("btn-save").textContent = id === "test" ? "Update draft" : "Save as draft";
