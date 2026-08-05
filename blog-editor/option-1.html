@@ -219,31 +219,18 @@ A scratch draft to poke at the Hub blog editor.
 		<!-- "Untitled" — brand-new draft, nothing typed yet:
 		     dimmed suggested outline with inline syntax assist -->
 		<div id="md-source-new" data-editor class="cm-scaffold hidden px-8 pb-8 pt-5">
-			<div class="scaffold-row"><span class="ghost-strong"><span class="scaffold-caret"></span># Your title here</span><span class="scaffold-hint mr-[76px]"><code>#</code> H1 — becomes the article title and its URL</span></div>
-			<div class="scaffold-row"></div>
-			<div class="scaffold-row"><span class="ghost">A short intro: what you built, and why it matters.</span><span class="scaffold-hint">plain lines are paragraphs</span></div>
-			<div class="scaffold-row"></div>
-			<div class="scaffold-row"><span class="ghost-strong">## Section heading</span><span class="scaffold-hint"><code>##</code> H2 · <code>###</code> H3</span></div>
-			<div class="scaffold-row"></div>
-			<div class="scaffold-row"><span class="ghost">- First point</span><span class="scaffold-hint"><code>-</code> bullets · <code>1.</code> numbered</span></div>
-			<div class="scaffold-row"><span class="ghost">- Second point</span></div>
-			<div class="scaffold-row"></div>
-			<div class="scaffold-row"><span class="ghost">```python</span><span class="scaffold-hint"><code>```</code> fenced code, syntax highlighted</span></div>
-			<div class="scaffold-row"><span class="ghost">print("hello world")</span></div>
-			<div class="scaffold-row"><span class="ghost">```</span></div>
-			<div class="scaffold-row"></div>
-			<div class="scaffold-row"><span class="ghost">&gt; Something worth quoting</span><span class="scaffold-hint"><code>&gt;</code> blockquote</span></div>
-			<div class="scaffold-row"></div>
-			<div class="scaffold-row"><span class="ghost">**bold** *italic* `code` [link](https://hf.co)</span><span class="scaffold-hint">inline formatting</span></div>
-			<div class="scaffold-row"></div>
-			<div class="scaffold-row"><span class="ghost">\\( a = b + c \\)</span><span class="scaffold-hint">LaTeX inline · <code>$$…$$</code> displayed</span></div>
-			<div class="scaffold-row"></div>
-			<div class="scaffold-row"><span class="ghost">![Alt text](image.png)</span><span class="scaffold-hint">or just drag &amp; drop / paste a file</span></div>
-			<div class="mt-7 flex items-center gap-1.5 font-sans text-xs text-gray-400">
-				<svg class="h-3.5 w-3.5 flex-none" viewBox="0 0 32 32" fill="currentColor"><path d="M17 22v-8h-4v2h2v6h-3v2h8v-2h-3z"/><path d="M16 8a1.5 1.5 0 1 0 1.5 1.5A1.5 1.5 0 0 0 16 8z"/><path d="M16 30a14 14 0 1 1 14-14a14 14 0 0 1-14 14zm0-26a12 12 0 1 0 12 12A12 12 0 0 0 16 4z"/></svg>
-				Start typing to replace this outline — nothing here is saved.
-				<button id="scaffold-guide-link" class="underline underline-offset-2 hover:text-gray-600">See the full syntax guide</button>
+			<div><span class="scaffold-caret"></span># Your title here</div>
+			<div>&nbsp;</div>
+			<div>Your post content here...</div>
+			<div class="mt-7">
+				<div>## Section heading</div>
+				<div>**bold** and *italic*</div>
+				<div>[link text](https://hf.co)</div>
 			</div>
+			<button id="scaffold-guide-link" class="mt-7 flex items-center gap-1.5 font-sans text-xs text-gray-400 hover:text-gray-600">
+				<svg class="h-3.5 w-3.5 flex-none" viewBox="0 0 32 32" fill="currentColor"><path d="M17 22v-8h-4v2h2v6h-3v2h8v-2h-3z"/><path d="M16 8a1.5 1.5 0 1 0 1.5 1.5A1.5 1.5 0 0 0 16 8z"/><path d="M16 30a14 14 0 1 1 14-14a14 14 0 0 1-14 14zm0-26a12 12 0 1 0 12 12A12 12 0 0 0 16 4z"/></svg>
+				<span>See full <span class="underline underline-offset-2">syntax guide</span></span>
+			</button>
 		</div>
 		<div id="md-preview-new" data-editor class="hidden px-10 py-20 text-center">
 			<p class="font-sans text-sm text-gray-400">Nothing to preview yet — start writing and your article will render here.</p>
