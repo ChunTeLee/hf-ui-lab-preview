@@ -157,7 +157,7 @@ function selectDraft(id) {
 	document.querySelectorAll("[data-preview-toggle] .lbl").forEach(l => (l.textContent = "Preview"));
 	// footer draft selector chip
 	document.getElementById("draft-chip-label").textContent =
-		id === "huggy" ? "Designing Huggy: Behind Hugging Face’s…" : "Test";
+		id === "huggy" ? "Designing Huggy: Behind Hugging Face’s…" : "Testing the community blog editor end to end";
 	document.getElementById("draft-chip-unsaved").style.display = id === "huggy" ? "" : "none";
 	// popover rows
 	rowH.className = id === "huggy" ? ROW_CURRENT : ROW_PLAIN;

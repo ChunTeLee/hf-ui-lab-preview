@@ -209,7 +209,7 @@ image = pipe("huggy waving, flat vector, brand yellow").images[0]</code></pre>
 
 		<!-- "Test" draft — the saved-draft example, swapped in via the footer selector -->
 		<div id="md-source-test" data-editor class="cm hidden px-8 pb-8 pt-5">
-<span class="h"># Test</span>
+<span class="h"># Testing the community blog editor end to end</span>
 
 A scratch draft to poke at the Hub blog editor.
 
@@ -219,7 +219,7 @@ A scratch draft to poke at the Hub blog editor.
 <span class="quote">&gt; Nothing to see here — just testing.</span>
 </div>
 		<div id="md-preview-test" data-editor class="prose-charter hidden max-w-3xl px-10 py-8">
-			<h1>Test</h1>
+			<h1>Testing the community blog editor end to end</h1>
 			<p>A scratch draft to poke at the Hub blog editor.</p>
 			<ul>
 				<li>Saved to the server, so it has history</li>
@@ -320,7 +320,7 @@ A scratch draft to poke at the Hub blog editor.
 						<span id="row-huggy-unsaved" class="rounded bg-white/90 px-1.5 py-px text-[11px] font-medium text-gray-900">unsaved</span>
 					</button>
 					<button id="row-test" data-draft="test" class="mb-px flex w-full items-center justify-between gap-1.5 truncate rounded-lg px-1.5 py-0.5 text-left text-gray-500 hover:text-gray-900">
-						<span class="truncate">Test</span>
+						<span class="truncate">Testing the community blog editor end to end</span>
 					</button>
 				</div>
 				<div class="flex flex-col text-[0.9rem]">
@@ -341,11 +341,13 @@ A scratch draft to poke at the Hub blog editor.
 			<span class="h-1.5 w-1.5 rounded-full bg-amber-400"></span>
 			Unsaved changes
 		</span>
-		<span id="status-saved" class="hidden text-sm text-gray-500">
-			<span data-saved-label>Saved 2 min ago</span>
+		<span class="flex items-center gap-1.5">
+			<span id="status-saved" class="hidden text-sm text-gray-400">
+				<span data-saved-label>Saved 2 min ago</span>
+			</span>
+			<span id="saved-dot" class="hidden text-gray-300">·</span>
+			<button id="history-btn" class="hidden text-sm text-gray-400 underline-offset-2 hover:text-gray-600 hover:underline">History</button>
 		</span>
-		<span id="saved-dot" class="hidden text-gray-300">·</span>
-		<button id="history-btn" class="hidden text-sm text-gray-400 underline-offset-2 hover:text-gray-600 hover:underline">History</button>
 		<span class="flex-1"></span>
 		<button id="btn-delete" class="pill pill-danger hidden">Delete draft</button>
 		<button id="btn-save" class="pill pill-secondary">Save as draft</button>
