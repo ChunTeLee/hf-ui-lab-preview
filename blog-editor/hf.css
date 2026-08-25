@@ -220,3 +220,14 @@ html { font-family: "Source Sans Pro", "Source Sans 3", -apple-system, BlinkMacS
 .thumb-replace:hover { background: rgb(0 0 0 / 0.65); }
 
 ::selection { background: rgb(255 210 30 / 0.4); }
+
+/* ── Document tabs (moon-landing components.css @utility tab) ──
+   used by the archived "before" replica of the production editor */
+.tab {
+	margin-bottom: -1px; display: flex; align-items: center;
+	cursor: pointer; user-select: none;
+	border-right: 1px solid #e5e7eb; padding: 0 1rem;
+	text-align: center; color: #6b7280; font-size: 0.875rem;
+}
+.tab:not(.active):hover { color: #374151; }
+.tab.active { background: #fff; font-weight: 600; color: #111827; }
