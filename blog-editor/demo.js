@@ -203,17 +203,14 @@ function selectDraft(id) {
 	document.getElementById("btn-delete").style.display = id === "test" ? "inline-block" : "none";
 	const saveBtn = document.getElementById("btn-save");
 	saveBtn.textContent = id === "test" ? "Update draft" : "Save as draft";
-	saveBtn.disabled = id === "new";
-	// an untouched article has no slug, no cover and only you on the byline
+	// an untouched article has no slug, no cover and nobody on the byline yet
 	const slug = document.getElementById("slug-input");
 	if (slug) slug.value = DRAFT_SLUGS[id];
-	const avail = document.getElementById("slug-available");
-	if (avail) avail.style.display = id === "new" ? "none" : "";
 	setThumbFilled(id !== "new");
-	const julien = document.getElementById("coauthor-julien");
-	if (julien) julien.style.display = id === "new" ? "none" : "flex";
-	const authorsLabel = document.querySelector("[data-authors-label]");
-	if (authorsLabel) authorsLabel.textContent = id === "new" ? "Authors" : "Coauthors";
+	["coauthor-chunte", "coauthor-julien"].forEach(rowId => {
+		const row = document.getElementById(rowId);
+		if (row) row.style.display = id === "new" ? "none" : "flex";
+	});
 	if (id === "test") { savedSeconds = 120; renderSaved(); }
 	closeSettings();
 }
@@ -282,14 +279,6 @@ if (o2RowHuggy && o2RowTest) {
 	renderO2();
 }
 
-// ── Authors label: "Coauthors" once more than one author is listed
-(function authorsLabel() {
-	const lbl = document.querySelector("[data-authors-label]");
-	if (!lbl) return;
-	const count = document.querySelectorAll(".author-row").length;
-	lbl.textContent = count > 1 ? "Coauthors" : "Authors";
-})();
-
 // ── Thumbnail replace (always-on translucent button)
 document.querySelectorAll("[data-thumb-replace]").forEach(btn =>
 	btn.addEventListener("click", () => showToast("Demo only — a file picker would open here"))
@@ -308,3 +297,11 @@ document.querySelectorAll("[data-thumb-add]").forEach(btn =>
 		document.querySelectorAll("[data-thumb-empty]").forEach(el => el.classList.add("hidden"));
 	})
 );
+
+// ── Namespace picker: keep the visible label in sync with the native select
+(function namespacePicker() {
+	const sel = document.getElementById("ns-select");
+	const label = document.getElementById("ns-label");
+	if (!sel || !label) return;
+	sel.addEventListener("change", () => { label.textContent = sel.value; });
+})();
